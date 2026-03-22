@@ -21,40 +21,6 @@ public class TestCaseRunner {
 			if (testCase == 4) active = false;
 			input.nextLine();
 			
-			switch (testCase) {
-				case 1 : // sets up the login test object.
-					System.out.println("Login Test");
-					System.out.println("__________");
-					System.out.println("Are there expected results? Y or N");
-					String expected = input.nextLine();
-					if (expected.toLowerCase().equals("y")) {
-						System.out.println("What is the expected result(s)");
-						expectedResults = input.nextLine();
-					} else {
-						expectedResults = "Unknown";
-					}
-					System.out.print("Do you know the username and password to be used? Y or N");
-					if (input.nextLine().toUpperCase().equals("Y")) {
-						System.out.println();
-						System.out.print("What is the username that is to be tested against? ");
-						String username = input.nextLine();
-						System.out.println();
-						System.out.print("What is the password that is to be tested against? ");
-						String password = input.nextLine();
-						System.out.println();
-						
-						LoginTest test = new LoginTest(expectedResults, username, password);
-						test.printTest();
-					} else {
-						LoginTest test = new LoginTest(expectedResults);
-						test.printTest();
-					}
-					break;
-					
-					
-				default : active = false;
-			}
-			
 		}
 		
 		input.close();
