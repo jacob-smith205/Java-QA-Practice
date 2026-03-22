@@ -1,6 +1,5 @@
 
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
 
 public class TestCaseRunner {
 
@@ -15,14 +14,26 @@ public class TestCaseRunner {
 		
 		boolean active = true;
 		int testCase = 0;
+		
+		//run program while active = true;
 		while (active) {
 			displayMenu();
 			
-			testCase = input.nextInt();
-			input.nextLine();
+			//get input from user on what test to complete.
+			
+			try {
+				testCase = input.nextInt();
+				input.nextLine();
+			} catch (InputMismatchException e) {
+				System.out.println("Invalid selection, input must be a number.");
+				
+				active = false;
+			}
+			
+			//this switch statement will call the method of the test gotten from the user
 			switch (testCase) {
 				case 1 : 
-					runLoginTest();
+					runLoginTest(input);
 					break;
 				default : 
 					System.out.println("Exiting Program");
@@ -30,7 +41,7 @@ public class TestCaseRunner {
 			}
 			
 			System.out.println("Do you wish to conduct another test? Y or N");
-			selectAnotherTest = input.nextLine();
+			selectAnotherTest = input.nextLine().toUpperCase();
 			
 			if (selectAnotherTest.equals("N")) {
 				active = false;
@@ -52,10 +63,65 @@ public class TestCaseRunner {
 	}
 	
 	// method runs the login test;
-	public static void runLoginTest() {
+	public static void runLoginTest(Scanner input) {
+		String expectedResults;
+		String username;
+		String password;
+		String testUsername;
+		String testPassword;
+		boolean manual;
+		
 		System.out.println("Login Test");
 		System.out.println("----------");
 		
+		// get input from the user on if the test is expecting successful logins, failed, or mix;
+		System.out.println("Will you test Succesful or failed logins? Or a mix?");
+		System.out.print("Type Success, fail, or mix: ");
+		expectedResults = input.nextLine();
+		System.out.println();
+		
+		System.out.print("Enter the Username that is going to be tested against : ");
+		username = input.nextLine();
+		System.out.println();
+		
+		System.out.print("Enter the Password that is going to be tested against : ");
+		password = input.nextLine();
+		System.out.println();
+		
+		System.out.println("Will the test be entered manually or from a file?");
+		System.out.print("Press M for manual and F for file : ");
+		manual = input.nextLine().toUpperCase().equals("M");
+		System.out.println();
+		
+		if (manual) {
+			System.out.print("Enter the username to test : ");
+			testUsername = input.nextLine();
+			System.out.println();
+			
+			System.out.print("Enter the password to test: ");
+			testPassword = input.nextLine();
+			System.out.println();
+			
+			System.out.println("Expected:");
+			System.out.println("Username: " + username);
+			System.out.println("Password: " + password);
+			System.out.println();
+			
+			System.out.println("Input:");
+			System.out.println("Username: " + testUsername);
+			System.out.println("Password: " + testPassword);
+			System.out.println();
+			
+			System.out.println("Output:");
+			
+			String result = "FAILED";
+			if (username.equals(testUsername) && password.equals(testPassword)) {
+				result = "PASSED";
+			}
+			
+			System.out.println("Login Test " + result);
+			System.out.println();
+		}
 		
 	}
 
