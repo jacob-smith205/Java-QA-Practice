@@ -15,13 +15,7 @@ public class TestCaseRunner {
 		boolean active = true;
 		int testCase = 0;
 		while (active) {
-			System.out.println("Select a Test Case:");
-			System.out.println("+++++++++++++++++++");
-			System.out.println();
-			System.out.println("1. Login");
-			System.out.println("2. Search");
-			System.out.println("3. Checkout");
-			System.out.println("4. Exit");
+			displayMenu();
 			
 			testCase = input.nextInt();
 			if (testCase == 4) active = false;
@@ -64,6 +58,16 @@ public class TestCaseRunner {
 		}
 		
 		input.close();
+	}
+	
+	public static void displayMenu() {
+		System.out.println("Select a Test Case:");
+		System.out.println("+++++++++++++++++++");
+		System.out.println();
+		System.out.println("1. Login");
+		System.out.println("2. Search");
+		System.out.println("3. Checkout");
+		System.out.println("4. Exit");
 	}
 
 }
