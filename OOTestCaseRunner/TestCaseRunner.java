@@ -69,14 +69,14 @@ public class TestCaseRunner {
 		String password;
 		String testUsername;
 		String testPassword;
+		String testType;
 		boolean manual;
 		
 		System.out.println("Login Test");
 		System.out.println("----------");
 		
 		// get input from the user on if the test is expecting successful logins, failed, or mix;
-		System.out.println("Will you test Succesful or failed logins? Or a mix?");
-		System.out.print("Type Success, fail, or mix: ");
+		System.out.println("Type the results that are expected. Example: Pass, Fail, or Mix");
 		expectedResults = input.nextLine();
 		System.out.println();
 		
@@ -88,23 +88,13 @@ public class TestCaseRunner {
 		password = input.nextLine();
 		System.out.println();
 		
-		System.out.println("Will the test be entered manually or from a file?");
-		System.out.print("Press M for manual and F for file : ");
-		manual = input.nextLine().toUpperCase().equals("M");
+		System.out.println("Press 'M' to run a test manually and 'F' to run from a file : ");
+		testType = input.nextLine().toUpperCase();
 		System.out.println();
 		
-		if (manual) {
-			System.out.print("Enter the username to test : ");
-			testUsername = input.nextLine();
-			System.out.println();
-			
-			System.out.print("Enter the password to test: ");
-			testPassword = input.nextLine();
-			System.out.println();
-			
-			
-			
-			//System.out.println("Login Test " + result);
+		while (!testType.equals("M") && !testType.equals("F")) {
+			System.out.print("Invalid input: Type 'M' for manual and 'F' for a file. ");
+			testType = input.nextLine().toUpperCase();
 			System.out.println();
 		}
 		
