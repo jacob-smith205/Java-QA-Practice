@@ -1,24 +1,34 @@
 
 public class LoginTest extends TestCase{
+	private String testNumber;
 	private String username; 
 	private String password;
+	private String testUsername;
+	private String testPassword;
 	
-	public LoginTest(String expected, String actual, String status, String username, String password) {
+	public LoginTest(String testNumber, String expected, String actual, String status, String username, String password, String testUsername, String testPassword) {
 		super("Login", expected, actual, status);
 		this.username = username;
 		this.password = password;
+		this.testPassword = testPassword;
+		this.testUsername = testUsername;
+		this.testNumber = testNumber;
 	}
 	
-	public LoginTest(String expected, String username, String password) {
-		this(expected, "Unknown", "Unknown", username, password);
+	public LoginTest(String testNumber, String expected, String username, String password) {
+		this(testNumber, expected, "Unknown", "Unknown", username, password, "unknown", "unknown");
 	}
 	
-	public LoginTest(String expected) {
-		this(expected, "Unknown", "Unknown", "TBD", "TBD");
+	public LoginTest(String testNumber, String expected) {
+		this(testNumber, expected, "Unknown", "Unknown", "TBD", "TBD", "unknown", "unknown");
 	}
 	
 	public LoginTest() {
-		this("Unknown", "Unknown", "Unknown", "TBD", "TBD");
+		this("Unknown", "Unknown", "Unknown", "Unknown", "TBD", "TBD", "unknown", "unknown");
+	}
+	
+	public String getTestNumber() {
+		return this.testNumber;
 	}
 	
 	public String getPassword() {
@@ -29,12 +39,32 @@ public class LoginTest extends TestCase{
 		return this.username;
 	}
 	
+	public String getTestUsername () {
+		return this.testUsername;
+	}
+	
+	public String getTestPassword() {
+		return this.testPassword;
+	}
+	
+	public void setTestNumber(String testNumber) {
+		this.testNumber = testNumber;
+	}
+	
 	public void setPassword(String password) {
 		this.password = password;
 	}
 	
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public void setTestPassword(String testPassword) {
+		this.testPassword = testPassword;
+	}
+	
+	public void setTestUsername(String testUsername) {
+		this.testUsername = testUsername;
 	}
 	
 	public void printTest() {
@@ -46,5 +76,24 @@ public class LoginTest extends TestCase{
 		System.out.println("Actual Results: " + super.getActualResults());
 		System.out.println("Status: " + super.getStatus());
 		System.out.println();
+	}
+	
+	public void printDetailedReport() {
+		System.out.println("Expected:");
+		System.out.println("Username: " + this.username);
+		System.out.println("Password: " + this.password);
+		System.out.println();
+		
+		System.out.println("Input:");
+		System.out.println("Username: " + this.testUsername);
+		System.out.println("Password: " + this.testPassword);
+		System.out.println();
+		
+		System.out.println("Output:");
+		
+		String result = "FAILED";
+		if (username.equals(testUsername) && password.equals(testPassword)) {
+			result = "PASSED";
+		}
 	}
 }

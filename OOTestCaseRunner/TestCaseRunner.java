@@ -102,24 +102,9 @@ public class TestCaseRunner {
 			testPassword = input.nextLine();
 			System.out.println();
 			
-			System.out.println("Expected:");
-			System.out.println("Username: " + username);
-			System.out.println("Password: " + password);
-			System.out.println();
 			
-			System.out.println("Input:");
-			System.out.println("Username: " + testUsername);
-			System.out.println("Password: " + testPassword);
-			System.out.println();
 			
-			System.out.println("Output:");
-			
-			String result = "FAILED";
-			if (username.equals(testUsername) && password.equals(testPassword)) {
-				result = "PASSED";
-			}
-			
-			System.out.println("Login Test " + result);
+			//System.out.println("Login Test " + result);
 			System.out.println();
 		}
 		
