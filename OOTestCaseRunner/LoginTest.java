@@ -1,12 +1,12 @@
 
 public class LoginTest extends TestCase{
-	private String testNumber;
+	private int testNumber;
 	private String username; 
 	private String password;
 	private String testUsername;
 	private String testPassword;
 	
-	public LoginTest(String testNumber, String expected, String actual, String status, String username, String password, String testUsername, String testPassword) {
+	public LoginTest(int testNumber, String expected, String actual, String status, String username, String password, String testUsername, String testPassword) {
 		super("Login", expected, actual, status);
 		this.username = username;
 		this.password = password;
@@ -15,19 +15,19 @@ public class LoginTest extends TestCase{
 		this.testNumber = testNumber;
 	}
 	
-	public LoginTest(String testNumber, String expected, String username, String password) {
+	public LoginTest(int testNumber, String expected, String username, String password) {
 		this(testNumber, expected, "Unknown", "Unknown", username, password, "unknown", "unknown");
 	}
 	
-	public LoginTest(String testNumber, String expected) {
+	public LoginTest(int testNumber, String expected) {
 		this(testNumber, expected, "Unknown", "Unknown", "TBD", "TBD", "unknown", "unknown");
 	}
 	
 	public LoginTest() {
-		this("Unknown", "Unknown", "Unknown", "Unknown", "TBD", "TBD", "unknown", "unknown");
+		this(0, "Unknown", "Unknown", "Unknown", "TBD", "TBD", "unknown", "unknown");
 	}
 	
-	public String getTestNumber() {
+	public int getTestNumber() {
 		return this.testNumber;
 	}
 	
@@ -47,7 +47,7 @@ public class LoginTest extends TestCase{
 		return this.testPassword;
 	}
 	
-	public void setTestNumber(String testNumber) {
+	public void setTestNumber(int testNumber) {
 		this.testNumber = testNumber;
 	}
 	
@@ -89,11 +89,7 @@ public class LoginTest extends TestCase{
 		System.out.println("Password: " + this.testPassword);
 		System.out.println();
 		
-		System.out.println("Output:");
+		System.out.println("Output: " + super.getStatus());
 		
-		String result = "FAILED";
-		if (username.equals(testUsername) && password.equals(testPassword)) {
-			result = "PASSED";
-		}
 	}
 }
