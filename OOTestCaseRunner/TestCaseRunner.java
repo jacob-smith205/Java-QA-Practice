@@ -6,11 +6,9 @@ public class TestCaseRunner {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		Scanner input = new Scanner(System.in);
-		//ArrayList<TestCase> testCases = new ArrayList<>();
-		//String expectedResults = "";
-		//String actualResults = "";
-		//String status = "";
 		String selectAnotherTest;
+		boolean validInput = false;
+		int numberOfOptions = 4;
 		
 		boolean active = true;
 		int testCase = 0;
@@ -20,15 +18,23 @@ public class TestCaseRunner {
 			displayMenu();
 			
 			//get input from user on what test to complete.
-			
-			try {
-				testCase = input.nextInt();
-				input.nextLine();
-			} catch (InputMismatchException e) {
-				System.out.println("Invalid selection, input must be a number.");
+			while (!validInput) {
+				try {
+					testCase = input.nextInt();
+					if (testCase < 1 || testCase > numberOfOptions) {
+						System.out.println("Invalid Selection, Please Try Again : ");
+					} else {
+						validInput = true;
+					}
+				} catch (InputMismatchException e) {
+					System.out.println("Invalid selection, input must be a number.");
+					System.out.print("Please Try Again : ");
+					input.next();
+					System.out.println();
+				}
 				
-				active = false;
-			}
+			} 
+			input.nextLine(); // clear input from above, if not, it will cause an ininate loop during manual test
 			
 			//this switch statement will call the method of the test gotten from the user
 			switch (testCase) {
