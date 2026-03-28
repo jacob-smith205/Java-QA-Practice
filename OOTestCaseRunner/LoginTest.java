@@ -68,7 +68,7 @@ public class LoginTest extends TestCase{
 	}
 	
 	public void printTest() {
-		System.out.println("Test: " + super.getTestName());
+		System.out.println("Test: " + super.getTestName() + " " + this.testNumber);
 		System.out.println("Tested Against: ");
 		System.out.println("  Username : " + this.username);
 		System.out.println("  Password : " + this.password);
