@@ -1,4 +1,5 @@
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.*;
@@ -94,6 +95,8 @@ public class TestCaseRunner {
 		try {
 			if (manual) {
 				runManualLoginTest(input);
+			} else {
+				runAutoTest(input);
 			}
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -107,15 +110,6 @@ public class TestCaseRunner {
 	 * @ param input is a scanner that is passed to the method. 
 	 */
 	public static void runManualLoginTest(Scanner input) throws FileNotFoundException {
-		/*
-		String expectedResults;
-		String actualResults;
-		String status;
-		String username;
-		String password;
-		String testUsername;
-		String testPassword;
-		*/
 		boolean runManualTest = true;
 		int testNumber = 1;
 		ArrayList<LoginTest> loginTestList = new ArrayList<LoginTest>();
@@ -168,6 +162,34 @@ public class TestCaseRunner {
 		System.out.println("Would you like to save your results to a file? Y or N"); 
 		if (input.next().toUpperCase().equals("Y")) {
 			saveTest(loginTestList, input);
+		}
+		
+	}
+	
+	public static void runAutoTest(Scanner input) throws FileNotFoundException {
+		String passwords;
+		String usernames;
+		boolean filesFound = false;
+		System.out.println("Running Login Test from a file ");
+		System.out.println();
+		Scanner userReader;
+		Scanner passReader;
+		
+		while (!filesFound) {
+			try {
+				System.out.print("Enter the file name that contains the test usernames");
+				usernames = input.next();
+				File userFile = new File(usernames);
+				userReader = new Scanner(userFile);
+				System.out.print("Enter the file name that contains the test passwords : ");
+				passwords = input.next();
+				File passFile = new File(passwords);
+				passReader = new Scanner(passFile);
+				System.out.println();
+				filesFound = true;
+			} catch (FileNotFoundException e) {
+				System.out.println("File not found, try again. ");
+			}
 		}
 		
 	}

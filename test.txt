@@ -1,0 +1,35 @@
+Login Results
+==============
+
+Test: Login 1
+Expected : 
+   Username : user
+   Password : admin
+   Result   : PASS
+Actual   : 
+   Username : user
+   Password : admin
+   Result   : PASS
+Status : Pass
+
+Test: Login 2
+Expected : 
+   Username : user
+   Password : admin
+   Result   : FAIL
+Actual   : 
+   Username : user
+   Password : user
+   Result   : FAIL
+Status : Pass
+
+Test: Login 3
+Expected : 
+   Username : user
+   Password : admin
+   Result   : PASS
+Actual   : 
+   Username : user
+   Password : user
+   Result   : FAIL
+Status : Fail
