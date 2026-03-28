@@ -27,6 +27,10 @@ public class LoginTest extends TestCase{
 		this(0, "Unknown", "Unknown", "Unknown", "TBD", "TBD", "unknown", "unknown");
 	}
 	
+	public String getTestName() {
+		return super.getTestName();
+	}
+	
 	public int getTestNumber() {
 		return this.testNumber;
 	}

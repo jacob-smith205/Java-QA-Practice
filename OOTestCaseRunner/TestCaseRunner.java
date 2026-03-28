@@ -1,4 +1,6 @@
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class TestCaseRunner {
@@ -89,10 +91,13 @@ public class TestCaseRunner {
 		
 		manual = (testType.equals("M")) ? true : false;
 		
-		if (manual) {
-			runManualLoginTest(input);
+		try {
+			if (manual) {
+				runManualLoginTest(input);
+			}
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
 		}
-		
 		
 		
 	}
@@ -101,7 +106,7 @@ public class TestCaseRunner {
 	 * runs the manual login test	
 	 * @ param input is a scanner that is passed to the method. 
 	 */
-	public static void runManualLoginTest(Scanner input) {
+	public static void runManualLoginTest(Scanner input) throws FileNotFoundException {
 		/*
 		String expectedResults;
 		String actualResults;
@@ -118,28 +123,37 @@ public class TestCaseRunner {
 		// run tests
 		while (runManualTest) {
 			// get input from the user on if the test is expecting successful logins, failed, or mix;
+			
+			String expectedResults;
+			String actualResults;
+			String status;
+			String username;
+			String password;
+			String testUsername;
+			String testPassword;
+			
 			System.out.println("Type the result that are expected. PASS OR FAIL");
-			String expectedResults = input.nextLine().toUpperCase();
+			expectedResults = input.nextLine().toUpperCase();
 			System.out.println();
 					
 			System.out.print("Enter the Username that is going to be tested against : ");
-			String username = input.nextLine();
+			username = input.nextLine();
 			System.out.println();
 					
 			System.out.print("Enter the Password that is going to be tested against : ");
-			String password = input.nextLine();
+			password = input.nextLine();
 			System.out.println();
 			
 			System.out.print("Enter the username that is going to be tested : ");
-			String testUsername = input.nextLine();
+			testUsername = input.nextLine();
 			System.out.println();
 			
 			System.out.print("Enter the password that is going to be tested : ");
-			String testPassword = input.nextLine();
+			testPassword = input.nextLine();
 			System.out.println();
 			
-			String actualResults = (password.equals(testPassword) && username.equals(testUsername)) ? "PASS" : "FAIL";
-			String status = (expectedResults.equals(actualResults)) ? "Pass" : "Fail";
+			actualResults = (password.equals(testPassword) && username.equals(testUsername)) ? "PASS" : "FAIL";
+			status = (expectedResults.equals(actualResults)) ? "Pass" : "Fail";
 			
 			loginTestList.add(new LoginTest(testNumber, expectedResults, actualResults, status, username, password, testUsername, testPassword));
 			
@@ -150,6 +164,40 @@ public class TestCaseRunner {
 			runManualTest = (runAgain.equals("Y")) ? true : false;
 			testNumber++;
 		}
+		
+		System.out.println("Would you like to save your results to a file? Y or N"); 
+		if (input.next().toUpperCase().equals("Y")) {
+			saveTest(loginTestList, input);
+		}
+		
+	}
+	
+	public static void saveTest(ArrayList<LoginTest> testInfo, Scanner input) throws FileNotFoundException {
+		String fileName;
+		System.out.println("What name would you like to save the file as? ");
+		fileName = input.next();
+		String testName = testInfo.get(0).getTestName();
+		
+		try (PrintWriter fileWriter = new PrintWriter(fileName)) {
+			fileWriter.println(testName + " Results");
+			fileWriter.println("==============");
+			for (int i = 0; i < testInfo.size(); i++) {
+				fileWriter.println();
+				fileWriter.println("Test: " + testName + " " + testInfo.get(i).getTestNumber());
+				fileWriter.println("Expected : ");
+				fileWriter.println("   Username : " + testInfo.get(i).getUsername());
+				fileWriter.println("   Password : " + testInfo.get(i).getPassword());
+				fileWriter.println("   Result   : " + testInfo.get(i).getExpectedResults());
+				fileWriter.println("Actual   : ");
+				fileWriter.println("   Username : " + testInfo.get(i).getTestUsername());
+				fileWriter.println("   Password : " + testInfo.get(i).getTestPassword());
+				fileWriter.println("   Result   : " + testInfo.get(i).getActualResults());
+				fileWriter.println("Status : " + testInfo.get(i).getStatus());				
+			}
+		}
+		
+		
+		
 	}
 
 }
