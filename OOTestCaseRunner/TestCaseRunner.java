@@ -102,6 +102,7 @@ public class TestCaseRunner {
 	 * @ param input is a scanner that is passed to the method. 
 	 */
 	public static void runManualLoginTest(Scanner input) {
+		/*
 		String expectedResults;
 		String actualResults;
 		String status;
@@ -109,6 +110,7 @@ public class TestCaseRunner {
 		String password;
 		String testUsername;
 		String testPassword;
+		*/
 		boolean runManualTest = true;
 		int testNumber = 1;
 		ArrayList<LoginTest> loginTestList = new ArrayList<LoginTest>();
@@ -117,35 +119,36 @@ public class TestCaseRunner {
 		while (runManualTest) {
 			// get input from the user on if the test is expecting successful logins, failed, or mix;
 			System.out.println("Type the result that are expected. PASS OR FAIL");
-			expectedResults = input.nextLine().toUpperCase();
+			String expectedResults = input.nextLine().toUpperCase();
 			System.out.println();
 					
 			System.out.print("Enter the Username that is going to be tested against : ");
-			username = input.nextLine();
+			String username = input.nextLine();
 			System.out.println();
 					
 			System.out.print("Enter the Password that is going to be tested against : ");
-			password = input.nextLine();
+			String password = input.nextLine();
 			System.out.println();
 			
 			System.out.print("Enter the username that is going to be tested : ");
-			testUsername = input.nextLine();
+			String testUsername = input.nextLine();
 			System.out.println();
 			
 			System.out.print("Enter the password that is going to be tested : ");
-			testPassword = input.nextLine();
+			String testPassword = input.nextLine();
 			System.out.println();
 			
-			actualResults = (password.equals(testPassword) && username.equals(testUsername)) ? "PASS" : "FAIL";
-			status = (expectedResults.equals(actualResults)) ? "Pass" : "Fail";
+			String actualResults = (password.equals(testPassword) && username.equals(testUsername)) ? "PASS" : "FAIL";
+			String status = (expectedResults.equals(actualResults)) ? "Pass" : "Fail";
 			
 			loginTestList.add(new LoginTest(testNumber, expectedResults, actualResults, status, username, password, testUsername, testPassword));
 			
 			loginTestList.get(testNumber - 1).printTest();
 			
 			System.out.println("Press 'Y' to run another test : "); 
-			String runAgain = input.nextLine();
-			runManualTest = false;
+			String runAgain = input.nextLine().toUpperCase();
+			runManualTest = (runAgain.equals("Y")) ? true : false;
+			testNumber++;
 		}
 	}
 
