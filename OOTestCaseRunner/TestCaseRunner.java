@@ -126,6 +126,8 @@ public class TestCaseRunner {
 			String testUsername;
 			String testPassword;
 			
+			
+			
 			System.out.println("Type the result that are expected. PASS OR FAIL");
 			expectedResults = input.nextLine().toUpperCase();
 			System.out.println();
@@ -169,28 +171,57 @@ public class TestCaseRunner {
 	public static void runAutoTest(Scanner input) throws FileNotFoundException {
 		String passwords;
 		String usernames;
-		boolean filesFound = false;
+		boolean userFileFound = false;
+		boolean passFileFound = false;
+		Scanner userReader = null;
+		Scanner passReader = null;
+		ArrayList<String> usernameList = new ArrayList<>();
+		ArrayList<String> passwordList = new ArrayList<>();
+		
+		
 		System.out.println("Running Login Test from a file ");
 		System.out.println();
-		Scanner userReader;
-		Scanner passReader;
 		
-		while (!filesFound) {
+		while (!userFileFound) {
 			try {
 				System.out.print("Enter the file name that contains the test usernames");
 				usernames = input.next();
 				File userFile = new File(usernames);
 				userReader = new Scanner(userFile);
-				System.out.print("Enter the file name that contains the test passwords : ");
-				passwords = input.next();
-				File passFile = new File(passwords);
-				passReader = new Scanner(passFile);
-				System.out.println();
-				filesFound = true;
+				userFileFound = true;
 			} catch (FileNotFoundException e) {
 				System.out.println("File not found, try again. ");
 			}
 		}
+			
+			while (!passFileFound) {
+				try {
+					System.out.print("Enter the file name that contains the test passwords : ");
+					passwords = input.next();
+					File passFile = new File(passwords);
+					passReader = new Scanner(passFile);
+					System.out.println();
+					passFileFound = true;
+				} catch (FileNotFoundException e) {
+					System.out.println("File not found, try again. ");
+				}
+			/*
+			 * There is definitely a way to have one test method that gets passed the fileScanners
+			 * and can run both manual and auto.
+			 */
+		}
+			
+		while (userReader.hasNextLine()) {
+			usernameList.add(userReader.nextLine());
+		}
+		while (passReader.hasNextLine()) {
+			passwordList.add(passReader.nextLine());
+		}
+		passReader.close();
+		userReader.close();
+		
+		System.out.println(usernameList);
+		System.out.println(passwordList);
 		
 	}
 	

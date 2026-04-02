@@ -1,6 +1,6 @@
 
 public class LoginTest extends TestCase{
-	private int testNumber;
+	private int testNumber = 1;
 	private String username; 
 	private String password;
 	private String testUsername;
