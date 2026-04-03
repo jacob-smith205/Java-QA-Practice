@@ -5,19 +5,11 @@ public class TestCase {
 	private String actualResults;
 	private String status;
 	
-	public TestCase(String testName, String expected, String actual, String status) {
-		this.testName = testName;
-		this.expectedResults = expected;
-		this.actualResults = actual;
-		this.status = status;
-	}
-	
-	public TestCase(String testName, String expected) {
-		this(testName, expected, "Unknown", "Unknown");
-	}
-	
 	public TestCase() {
-		this("No Test Set", "Nothing Expected", "Unknown", "Unknown");
+		this.testName = "";
+		this.expectedResults = "";
+		this.actualResults = "";
+		this.status = "";
 	}
 	
 	public String getTestName() {
@@ -48,8 +40,8 @@ public class TestCase {
 		return this.status;
 	}
 	
-	public void setStatus(String status) {
-		this.status = status;
+	public void setStatus() {
+		this.status = (this.actualResults.equals(this.expectedResults)) ? "Pass" : "Fail";
 	}
 	
 	public void printTest() {

@@ -1,38 +1,18 @@
 
 public class LoginTest extends TestCase{
-	private int testNumber = 1;
+	private static int testNumber = 1;
 	private String username; 
 	private String password;
 	private String testUsername;
 	private String testPassword;
 	
-	public LoginTest(int testNumber, String expected, String actual, String status, String username, String password, String testUsername, String testPassword) {
-		super("Login", expected, actual, status);
-		this.username = username;
-		this.password = password;
-		this.testPassword = testPassword;
-		this.testUsername = testUsername;
-		this.testNumber = testNumber;
-	}
-	
-	public LoginTest(int testNumber, String expected, String username, String password) {
-		this(testNumber, expected, "Unknown", "Unknown", username, password, "unknown", "unknown");
-	}
-	
-	public LoginTest(int testNumber, String expected) {
-		this(testNumber, expected, "Unknown", "Unknown", "TBD", "TBD", "unknown", "unknown");
-	}
-	
 	public LoginTest() {
-		this(0, "Unknown", "Unknown", "Unknown", "TBD", "TBD", "unknown", "unknown");
-	}
-	
-	public String getTestName() {
-		return super.getTestName();
+		super.setTestName("LoginTest " + testNumber);
+		testNumber++;
 	}
 	
 	public int getTestNumber() {
-		return this.testNumber;
+		return LoginTest.testNumber;
 	}
 	
 	public String getPassword() {
@@ -51,10 +31,6 @@ public class LoginTest extends TestCase{
 		return this.testPassword;
 	}
 	
-	public void setTestNumber(int testNumber) {
-		this.testNumber = testNumber;
-	}
-	
 	public void setPassword(String password) {
 		this.password = password;
 	}
@@ -71,8 +47,15 @@ public class LoginTest extends TestCase{
 		this.testUsername = testUsername;
 	}
 	
+	public void check() {
+		boolean pass = this.username.equals(this.testUsername)&& this.password.equals(this.testPassword);
+		String actual = (pass) ? "PASS" : "FAIL";
+		super.setActualResults(actual);
+		super.setStatus();
+	}
+	
 	public void printTest() {
-		System.out.println("Test: " + super.getTestName() + " " + this.testNumber);
+		System.out.println("Test: " + super.getTestName());
 		System.out.println("Tested Against: ");
 		System.out.println("  Username : " + this.username);
 		System.out.println("  Password : " + this.password);

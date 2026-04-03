@@ -111,7 +111,6 @@ public class TestCaseRunner {
 	 */
 	public static void runManualLoginTest(Scanner input) throws FileNotFoundException {
 		boolean runManualTest = true;
-		int testNumber = 1;
 		ArrayList<LoginTest> loginTestList = new ArrayList<LoginTest>();
 		
 		// run tests
@@ -119,46 +118,46 @@ public class TestCaseRunner {
 			// get input from the user on if the test is expecting successful logins, failed, or mix;
 			
 			String expectedResults;
-			String actualResults;
-			String status;
 			String username;
 			String password;
 			String testUsername;
 			String testPassword;
-			
-			
+			LoginTest test = new LoginTest();			
 			
 			System.out.println("Type the result that are expected. PASS OR FAIL");
 			expectedResults = input.nextLine().toUpperCase();
 			System.out.println();
+			test.setExpectedResults(expectedResults);
 					
 			System.out.print("Enter the Username that is going to be tested against : ");
 			username = input.nextLine();
 			System.out.println();
+			test.setUsername(username);
 					
 			System.out.print("Enter the Password that is going to be tested against : ");
 			password = input.nextLine();
 			System.out.println();
+			test.setPassword(password);
 			
 			System.out.print("Enter the username that is going to be tested : ");
 			testUsername = input.nextLine();
 			System.out.println();
+			test.setTestUsername(testUsername);
 			
 			System.out.print("Enter the password that is going to be tested : ");
 			testPassword = input.nextLine();
 			System.out.println();
+			test.setTestPassword(testPassword);
 			
-			actualResults = (password.equals(testPassword) && username.equals(testUsername)) ? "PASS" : "FAIL";
-			status = (expectedResults.equals(actualResults)) ? "Pass" : "Fail";
+			test.check();			
 			
-			loginTestList.add(new LoginTest(testNumber, expectedResults, actualResults, status, username, password, testUsername, testPassword));
+			loginTestList.add(test);
 			
-			loginTestList.get(testNumber - 1).printTest();
+			test.printTest();
 			
 			System.out.println("Press 'Y' to run another test : "); 
 			String runAgain = input.nextLine().toUpperCase();
 			runManualTest = (runAgain.equals("Y")) ? true : false;
-			testNumber++;
 		}
 		
 		System.out.println("Would you like to save your results to a file? Y or N"); 
